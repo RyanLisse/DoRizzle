@@ -1,0 +1,27 @@
+{
+  "version": "5",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1695243024375,
+      "tag": "0000_sturdy_deadpool",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1695318666730,
+      "tag": "0001_fair_saracen",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1695321306415,
+      "tag": "0002_vengeful_mordo",
+      "breakpoints": true
+    }
+  ]
+}
