@@ -115,7 +115,7 @@ export default function TodoList({
     <div className="flex w-screen justify-center items-center h-screen">
       <div className="shadow-2xl rounded-lg p-6 container w-3/5 mx-auto transition-colors duration-500">
         <motion.h1
-          className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-500"
+          className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none bg-clip-text text-transparent bg-gradient-to-r from-stone-950 to-stone-100 dark:bg-gradient-to-r dark:from-stone-50 dark:to-stone-600"
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
