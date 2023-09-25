@@ -1,7 +1,7 @@
 import React from "react";
-import { ModeToggle } from "./theme-toggle";
 import Link from "next/link";
 import Image from "next/image";
+import {ModeToggle} from "@/components/ThemeToggle";
 
 const Navbar = () => {
   return (
@@ -9,7 +9,7 @@ const Navbar = () => {
       <Link href="/">
           <Image src="/logo.png" width="50" height="50" alt="Ryan Logo" />
       </Link>
-      <h1 className="text-lg font-black ">DoRizzle</h1>
+      <h1 className="text-lg font-black ">DoRiZZle</h1>
       <ModeToggle />
     </nav>
   );
