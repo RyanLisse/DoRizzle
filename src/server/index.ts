@@ -1,17 +1,17 @@
 import { z } from "zod";
 import { eq } from "drizzle-orm";
-import { drizzle } from "drizzle-orm/better-sqlite3";
-import Database from "better-sqlite3";
-import { migrate } from "drizzle-orm/better-sqlite3/migrator";
+import { neon, neonConfig } from "@neondatabase/serverless";
+import { drizzle } from "drizzle-orm/neon-http";
 import { publicProcedure, router } from "./trpc";
-import { todos } from "@/app/db/schema";
+import * as schema from "@/app/db/schema";
+import {todos} from "@/app/db/schema";
+const sql = neon(process.env.DATABASE_URL!);
+neonConfig.fetchConnectionCache = true;
+const db = drizzle(sql, { schema });
 
-const sqlite = new Database("sqlite.db");
-const db = drizzle(sqlite);
-migrate(db, { migrationsFolder: "drizzle" });
 export const appRouter = router({
   getTodos: publicProcedure.query(async () => {
-    return db.select().from(todos).all();
+    return db.select().from(todos).execute();
   }),
 
   addTodos: publicProcedure
@@ -24,10 +24,9 @@ export const appRouter = router({
       })
     )
     .mutation(async (opts) => {
-        db.insert(todos).values(opts.input).run();
+      await db.insert(todos).values(opts.input).execute();
       return true;
     }),
-
   setDone: publicProcedure
     .input(
       z.object({
@@ -38,20 +37,20 @@ export const appRouter = router({
       })
     )
     .mutation(async (opts) => {
-        db
-            .update(todos)
-            .set({
-                done: opts.input.done,
-                lastEdited: opts.input.lastEdited,
-                createdAt: opts.input.createdAt,
-            })
-            .where(eq(todos.id, opts.input.id))
-            .run();
+      await db
+        .update(todos)
+        .set({
+          done: opts.input.done,
+          lastEdited: opts.input.lastEdited,
+          createdAt: opts.input.createdAt,
+        })
+        .where(eq(todos.id, opts.input.id))
+        .execute();
       return true;
     }),
 
   deleteTodo: publicProcedure.input(z.number()).mutation(async (opts) => {
-      db.delete(todos).where(eq(todos.id, opts.input)).run();
+    await db.delete(todos).where(eq(todos.id, opts.input)).execute();
     return true;
   }),
 
@@ -65,15 +64,15 @@ export const appRouter = router({
       })
     )
     .mutation(async (opts) => {
-        db
-            .update(todos)
-            .set({
-                content: opts.input.content,
-                lastEdited: opts.input.lastEdited,
-                createdAt: opts.input.createdAt,
-            })
-            .where(eq(todos.id, opts.input.id))
-            .run();
+      await db
+        .update(todos)
+        .set({
+          content: opts.input.content,
+          lastEdited: opts.input.lastEdited,
+          createdAt: opts.input.createdAt,
+        })
+        .where(eq(todos.id, opts.input.id))
+        .execute();
       return true;
     }),
 });

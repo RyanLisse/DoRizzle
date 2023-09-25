@@ -1,17 +1,23 @@
 "use client";
-import {trpc} from "@/app/_trpc/client";
-import {useForm} from "react-hook-form";
-import {useToast} from "@/components/ui/use-toast";
-import {EditIcon, TrashIcon} from "lucide-react";
-import {useState} from "react";
+import { trpc } from "@/app/_trpc/client";
+import { useForm } from "react-hook-form";
+import { useToast } from "@/components/ui/use-toast";
+import { EditIcon, TrashIcon } from "lucide-react";
+import { useState } from "react";
 
-import {Form, FormControl, FormField, FormItem, FormMessage,} from "@/components/ui/form";
-import {Input} from "@/components/ui/input";
-import {Button} from "@/components/ui/button";
-import {zodResolver} from "@hookform/resolvers/zod";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import {motion} from "framer-motion";
-import {serverClient} from "@/app/_trpc/serverClient";
+import { motion } from "framer-motion";
+import { serverClient } from "@/app/_trpc/serverClient";
 
 const formSchema = z.object({
   content: z.string().nonempty({ message: "Todo content is required." }),
@@ -109,12 +115,12 @@ export default function TodoList({
     <div className="flex w-screen justify-center items-center h-screen">
       <div className="shadow-2xl rounded-lg p-6 container w-3/5 mx-auto transition-colors duration-500">
         <motion.h1
-          className="text-6xl font-black mb-4"
+          className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-500"
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
         >
-         DoRizzle
+          DoRizzle
         </motion.h1>
         <motion.p
           className="text-lg mb-6"
